@@ -1,4 +1,5 @@
-﻿using AntsFarm.Models.Entities.Interfaces;
+﻿using AntsFarm.Engine.AntState.Handler;
+using AntsFarm.Models.Entities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,6 +12,6 @@ namespace AntsFarm.Engine.AntState.Interfaces
     public interface IAntState
     {
         public List<Point> CurrentCourse { get; set; }
-        public void Move(IAnt ant);
+        public void Execute(IAntHandler ant);
     }
 }

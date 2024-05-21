@@ -1,4 +1,5 @@
-﻿using AntsFarm.Models.Utilities;
+﻿using AntsFarm.Models.Entities.Implementations;
+using AntsFarm.Models.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace AntsFarm.Engine.BoardGenerator.Implementation
                 for (int j = 0; j < board.GetLength(); j++)
                 {
                     board[i, j] = entityGenerator.GenerateEntity();
+                    if (board[i, j].GetType() == typeof(Grain)) {
+                        board.GrainPositions.Add(new System.Drawing.Point(i, j));
+                    }
                 }
             }
             

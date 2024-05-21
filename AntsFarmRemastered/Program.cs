@@ -17,3 +17,8 @@ for (int i = 0; i < board.GetLength(); i++)
     }
     Console.WriteLine();
 }
+
+foreach (var item in board.GrainPositions)
+{
+    Console.WriteLine(item.X + item.Y);
+}
