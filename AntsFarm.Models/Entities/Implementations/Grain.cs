@@ -13,6 +13,7 @@ namespace AntsFarm.Models.Entities.Implementations
         {
             Symbol = 'G';
             Name = "Grain";
+            IsWalkable = true;
         }
     }
 }

@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace AntsFarm.Models.Utilities
 {
-    public class Board : IBoard, 
+    public class Board : IBoard
     {
 
         public Board(int size) {
-            _board = new IPathFindable[size, size];
+            _board = new ITile[size, size];
         }
 
-        private IPathFindable[,] _board;
+        private ITile[,] _board;
 
         public Point QueenPosition { get; set; }
 
         public List<Point> GrainPositions { get; set; } = new List<Point>();
-        public IPathFindable this[int index, int index2]
+        public ITile this[int index, int index2]
         {
             get
             {

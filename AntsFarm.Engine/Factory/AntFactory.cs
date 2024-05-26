@@ -16,18 +16,18 @@ namespace AntsFarm.Engine.Factory
     public class AntFactory : IAntFactory
     {
         private readonly AStarPathFinder _pathFinder;
-        private readonly IBoard board;
         private int grainCount = 0;
-        public AntFactory(AStarPathFinder finder, IBoard board)
+        public AntFactory(AStarPathFinder finder)
         {
             _pathFinder = finder;
-            this.board = board;
+           
         }
         public IAntHandler CreateAnt()
         {
-            AntHandler handler = new AntHandler(board);
+            AntHandler handler = new AntHandler();
             handler.Ant = new BaseAnt();
-            handler.AntState = new SearchingState(_pathFinder.FindPath(new System.Drawing.Point(0, 0), board.GrainPositions[grainCount]));
+            handler.AntState = new SearchingState(_pathFinder.FindPath(new System.Drawing.Point(0, 0), _pathFinder.b.GrainPositions[grainCount]));
+            grainCount++;
             return handler;
         }
     }

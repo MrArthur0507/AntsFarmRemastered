@@ -12,7 +12,7 @@ namespace AntsFarm.Engine.PathFinding.Implementations
 {
     public class AStarPathFinder : IPathFinder
     {
-        private readonly IBoard b;
+        public IBoard b { get; set; }
 
         public AStarPathFinder(IBoard board)
         {
@@ -46,7 +46,7 @@ namespace AntsFarm.Engine.PathFinding.Implementations
                     if (closedList.Contains(neighbor.Position))
                         continue;
 
-                    PathFindableEntity entity = (PathFindableEntity)b[neighbor.Position.X, neighbor.Position.Y];
+                    PathFindableEntity entity = (PathFindableEntity)b[neighbor.Position.X, neighbor.Position.Y].BaseTile;
                     if (!entity.IsWalkable)
                         continue;
 

@@ -1,5 +1,6 @@
 ﻿using AntsFarm.Engine.AntState.Interfaces;
 using AntsFarm.Engine.Mediator.Implementation;
+using AntsFarm.Engine.Observer;
 using AntsFarm.Models.Entities.Interfaces;
 using AntsFarm.Models.Utilities;
 using System;
@@ -16,15 +17,8 @@ namespace AntsFarm.Engine.AntState.Handler
         public IAnt Ant { get; set; }
         public IAntState AntState { get; set; }
         public QueenMediator QueenMediator { get; set; }
-        public IBoard board { get; set; }
 
-        public AntHandler(IBoard board)
-        {
-            this.board = board;
-        }
-        public void MoveAnt(Point p)
-        {
-            AntState.Execute(this);
-        }
+        public Point LastPos { get; set; }
+
     }
 }

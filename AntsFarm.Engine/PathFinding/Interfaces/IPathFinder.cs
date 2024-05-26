@@ -10,7 +10,7 @@ namespace AntsFarm.Engine.PathFinding.Interfaces
 {
     public interface IPathFinder
     {
-        
+        public IBoard b { get; set; }
         public List<Point> FindPath(Point start, Point end);
     }
 }

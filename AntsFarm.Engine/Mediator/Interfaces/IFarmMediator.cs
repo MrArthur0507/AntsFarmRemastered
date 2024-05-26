@@ -10,6 +10,6 @@ namespace AntsFarm.Engine.Mediator.Interfaces
 {
     public interface IFarmMediator
     {
-        public void AddAnt(IAntHandler ant);
+        public void RegisterAnt(IAntHandler ant);
     }
 }

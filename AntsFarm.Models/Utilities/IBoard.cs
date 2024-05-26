@@ -10,7 +10,7 @@ namespace AntsFarm.Models.Utilities
 {
     public interface IBoard
     {
-        public IPathFindable this[int index, int index2] { get; set; }
+        public ITile this[int index, int index2] { get; set; }
 
         public Point QueenPosition { get; set; }
         public List<Point> GrainPositions { get; set; }

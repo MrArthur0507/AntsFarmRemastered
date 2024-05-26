@@ -11,5 +11,10 @@ namespace AntsFarm.Models.Entities.Implementations
     public class BaseAnt : PathFindableEntity, IAnt
     {
         public decimal Energy { get; set; }
+
+        public BaseAnt()
+        {
+            Symbol = 'A';
+        }
     }
 }
