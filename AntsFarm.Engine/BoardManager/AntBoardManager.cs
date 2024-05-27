@@ -55,5 +55,14 @@ namespace AntsFarm.Engine.BoardManager
                 Console.WriteLine();
             }
         }
+
+        public void Update(IAntHandler antHandler, string ev)
+        {
+            Update(antHandler);
+            if (ev == "found")
+            {
+                board[antHandler.Ant.Location.X, antHandler.Ant.Location.Y] = new Tile(new PathFindableEntity());
+            }
+        }
     }
 }

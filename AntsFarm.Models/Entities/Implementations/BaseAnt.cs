@@ -15,6 +15,7 @@ namespace AntsFarm.Models.Entities.Implementations
         public BaseAnt()
         {
             Symbol = 'A';
+            Energy = 100;
         }
     }
 }

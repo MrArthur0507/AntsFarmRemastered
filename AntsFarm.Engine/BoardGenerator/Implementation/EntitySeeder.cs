@@ -16,20 +16,32 @@ namespace AntsFarm.Engine.BoardGenerator.Implementation
             random = new Random();
             entityGenerator = new EntityGenerator();
         }
-        
-        public void SeedBoard(IBoard board)
+        private int grainCount = 0;
+        public void SeedBoard(IBoard board, int maxGrainCount)
         {
             for (int i = 0; i < board.GetLength(); i++)
             {
                 for (int j = 0; j < board.GetLength(); j++)
                 {
-                    board[i, j] = new Tile(entityGenerator.GenerateEntity());
-                    if (board[i, j].BaseTile.GetType() == typeof(Grain))
+                    if (grainCount < maxGrainCount)
                     {
+                        board[i, j] = new Tile(new Grain());
                         board.GrainPositions.Add(new System.Drawing.Point(i, j));
+                        grainCount++;
+                    } else
+                    {
+                        board[i, j] = new Tile(entityGenerator.GenerateEntity());
+                        if (board[i, j].BaseTile.GetType() == typeof(Grain))
+                        {
+                            board.GrainPositions.Add(new System.Drawing.Point(i, j));
+                        }
                     }
+                    
                 }
             }
+
+            board[board.GetLength() - 1, board.GetLength() - 1] = new Tile(new BaseQueen());
+            board.QueenPosition = new System.Drawing.Point(board.GetLength() - 1, board.GetLength() - 1);
             
         }
 

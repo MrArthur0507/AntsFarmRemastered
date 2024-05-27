@@ -26,11 +26,12 @@ namespace AntsFarm.Engine.AntState.Implementations
                 ant.Ant.Location = CurrentCourse[pos];
                 ant.QueenMediator.Notify(ant, "moved");
                 pos++;
+                ant.Ant.Energy--;
                 
             } else
             {
                 ant.QueenMediator.Notify(ant, "found");
-                ant.AntState = new TravelingToQueenState();
+                ant.StateFactory.GenerateState(ant, "travelingToQueen");
             }
             
         }

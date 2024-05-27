@@ -9,6 +9,6 @@ namespace AntsFarm.Engine.Observer
 {
     public interface IObserver
     {
-        void Update(IAntHandler antHandler);
+        void Update(IAntHandler antHandler, string ev);
     }
 }

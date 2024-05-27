@@ -20,19 +20,15 @@ namespace AntsFarm.Engine.BoardGenerator.Implementation
         public IPathFindable GenerateEntity()
         {
             int r = random.Next(0, 11);
-            if (r >= 0 && r <= 5)
+            if (r >= 0 && r <= 7)
             {
                 return new PathFindableEntity();
-            }
-            else if (r <= 8)
+            } else
             {
                 return new Obstacle();
             }
-            else
-            {
-                
-                return new Grain();
-            }
+            
+            
         }
     }
 }

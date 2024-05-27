@@ -1,4 +1,5 @@
 ﻿using AntsFarm.Engine.AntState.Interfaces;
+using AntsFarm.Engine.AntState.StateFactory.Interfaces;
 using AntsFarm.Engine.Mediator.Implementation;
 using AntsFarm.Models.Entities.Interfaces;
 using AntsFarm.Models.Utilities;
@@ -17,6 +18,7 @@ namespace AntsFarm.Engine.AntState.Handler
         public QueenMediator QueenMediator { get; set; }
         public IAntState AntState { get; set; }
 
+        public IStateFactory StateFactory { get; set; }
         public Point LastPos { get; set; }
     }
 }

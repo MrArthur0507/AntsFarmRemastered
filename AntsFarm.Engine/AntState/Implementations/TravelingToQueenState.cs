@@ -12,10 +12,22 @@ namespace AntsFarm.Engine.AntState.Implementations
     public class TravelingToQueenState : IAntState
     {
         public List<Point> CurrentCourse { get; set; }
-
+        private int pos = 0;
         public void Execute(IAntHandler ant)
         {
-            ant.QueenMediator.Notify(ant, "Traveling to ant");
+            if (pos < CurrentCourse.Count)
+            {
+                ant.Ant.Energy--;
+                ant.LastPos = ant.Ant.Location;
+                ant.Ant.Location = CurrentCourse[pos];
+                ant.QueenMediator.Notify(ant, "moved");
+                pos++;
+
+            }
+            else
+            {
+                ant.QueenMediator.Notify(ant, "delivered");
+            }
         }
     }
 }

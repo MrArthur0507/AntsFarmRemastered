@@ -17,7 +17,7 @@ namespace AntsFarm.Engine.BoardGenerator.Implementation
         public IBoard GenerateBoard(int size)
         {
             IBoard board = new Board(size);
-            seeder.SeedBoard(board);
+            seeder.SeedBoard(board, 100);
             return board;
         }
 

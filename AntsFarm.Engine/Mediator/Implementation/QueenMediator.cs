@@ -28,7 +28,7 @@ namespace AntsFarm.Engine.Mediator.Implementation
                 Console.WriteLine($"{sender.Ant.Location.X} + {sender.Ant.Location.Y}");
                 foreach (var item in Observers)
                 {
-                    item.Update(sender);
+                    item.Update(sender, ev);
                 }
             }
             else if (ev == "found")
@@ -36,8 +36,11 @@ namespace AntsFarm.Engine.Mediator.Implementation
                 Console.WriteLine($"{sender.Ant.Id} found the grain at pos {sender.Ant.Location.X}{sender.Ant.Location.Y}");
                 foreach (var item in Observers)
                 {
-                    item.Update(sender);
+                    item.Update(sender, ev);
                 }
+            } else if (ev == "delivered")
+            {
+                Console.WriteLine($"{sender.Ant.Id} delivered grain with enery {sender.Ant.Energy}");
             }
             
         }
