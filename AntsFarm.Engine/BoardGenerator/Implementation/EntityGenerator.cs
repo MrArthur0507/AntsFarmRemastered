@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AntsFarm.Engine.BoardGenerator.Interfaces;
 
 namespace AntsFarm.Engine.BoardGenerator.Implementation
 {
-    public class EntityGenerator
+    public class EntityGenerator : IEntityGenerator
     {
         private readonly Random random;
         public EntityGenerator()

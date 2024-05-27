@@ -12,10 +12,10 @@ namespace AntsFarm.Engine.Mediator.Implementation
 {
     public class QueenMediator : IFarmMediator
     {
-        public List<IAntHandler> ants = new List<IAntHandler>();
+        public List<IAntHandler> Ants { get; set; } =  new List<IAntHandler>();
         public void RegisterAnt(IAntHandler ant)
         {
-            ants.Add(ant);
+            Ants.Add(ant);
             ant.QueenMediator = this;
         }
 

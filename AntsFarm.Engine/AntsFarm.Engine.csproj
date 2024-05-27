@@ -10,8 +10,4 @@
     <ProjectReference Include="..\AntsFarm.Models\AntsFarm.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BoardGenerator\Interfaces\" />
-  </ItemGroup>
-
 </Project>

@@ -7,7 +7,7 @@ using AntsFarm.Models.Utilities;
 Console.WriteLine("Hello, World!");
 
 
-BoardCreator boardCreator = new BoardCreator(new EntitySeeder());
+BoardCreator boardCreator = new BoardCreator(new EntitySeeder(new EntityGenerator()));
 AntBoardManager antBoardManager = new AntBoardManager(boardCreator);
 antBoardManager.Init(20);
 

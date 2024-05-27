@@ -1,4 +1,5 @@
-﻿using AntsFarm.Models.Entities.Implementations;
+﻿using AntsFarm.Engine.BoardGenerator.Interfaces;
+using AntsFarm.Models.Entities.Implementations;
 using AntsFarm.Models.Utilities;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace AntsFarm.Engine.BoardGenerator.Implementation
 {
-    public class EntitySeeder
+    public class EntitySeeder : IEntitySeeder
     {
         private readonly Random random;
-        private readonly EntityGenerator entityGenerator;
-        public EntitySeeder() {
+        private readonly IEntityGenerator _entityGenerator;
+        public EntitySeeder(IEntityGenerator entityGenerator) {
             random = new Random();
-            entityGenerator = new EntityGenerator();
+            _entityGenerator = entityGenerator;
         }
         private int grainCount = 0;
         public void SeedBoard(IBoard board, int maxGrainCount)
@@ -30,7 +31,7 @@ namespace AntsFarm.Engine.BoardGenerator.Implementation
                         grainCount++;
                     } else
                     {
-                        board[i, j] = new Tile(entityGenerator.GenerateEntity());
+                        board[i, j] = new Tile(_entityGenerator.GenerateEntity());
                         if (board[i, j].BaseTile.GetType() == typeof(Grain))
                         {
                             board.GrainPositions.Add(new System.Drawing.Point(i, j));

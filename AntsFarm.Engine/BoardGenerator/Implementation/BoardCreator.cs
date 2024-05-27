@@ -1,4 +1,5 @@
-﻿using AntsFarm.Models.Utilities;
+﻿using AntsFarm.Engine.BoardGenerator.Interfaces;
+using AntsFarm.Models.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AntsFarm.Engine.BoardGenerator.Implementation
 {
-    public class BoardCreator
+    public class BoardCreator : IBoardCreator
     {
         private readonly EntitySeeder seeder;
         public BoardCreator(EntitySeeder entitySeeder)
