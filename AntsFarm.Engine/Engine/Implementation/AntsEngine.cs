@@ -1,9 +1,11 @@
-﻿using AntsFarm.Engine.BoardGenerator.Implementation;
+﻿using AntsFarm.Engine.AntState.Handler;
+using AntsFarm.Engine.BoardGenerator.Implementation;
 using AntsFarm.Engine.BoardManager;
 using AntsFarm.Engine.Engine.Interfaces;
 using AntsFarm.Engine.Factory;
 using AntsFarm.Engine.Mediator.Implementation;
 using AntsFarm.Engine.Mediator.Interfaces;
+using AntsFarm.Engine.Observer;
 using AntsFarm.Models.Utilities;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AntsFarm.Engine.Engine.Implementation
 {
-    public class AntsEngine : IEngine
+    public class AntsEngine : IEngine, IObserver
     {
         private int antsCount;
 
@@ -24,13 +26,17 @@ namespace AntsFarm.Engine.Engine.Implementation
         private readonly IFarmMediator farmMediator;
         private readonly AntFactory antFactory;
         private readonly AntBoardManager antBoardManager;
-
+        private BoardResponse boardResponse = new BoardResponse();
+        
+        public List<string> Messages { get; set; } = new List<string>();
         public AntsEngine(QueenMediator mediator, AntFactory factory, AntBoardManager antBoardManager)
         {
             farmMediator = mediator;
             antFactory = factory;
             this.antBoardManager = antBoardManager;
             Setup(20);
+            boardResponse.Board = antBoardManager.GetBoard();
+            boardResponse.Messages = Messages;
         }
 
         private void Setup(int size)
@@ -38,6 +44,7 @@ namespace AntsFarm.Engine.Engine.Implementation
             
             antBoardManager.Print();
             farmMediator.Observers.Add(antBoardManager);
+            farmMediator.Observers.Add(this);
         }
 
         public void Start()
@@ -50,8 +57,9 @@ namespace AntsFarm.Engine.Engine.Implementation
             }
         }
 
-        public IBoard HandleMove()
+        public BoardResponse HandleMove()
         {
+            Messages.Clear();
             if (antsCount < 100)
             {
                 farmMediator.RegisterAnt(antFactory.CreateAnt());
@@ -61,7 +69,27 @@ namespace AntsFarm.Engine.Engine.Implementation
             {
                 antHandler.AntState.Execute(antHandler);
             }
-            return antBoardManager.GetBoard();
+            if (farmMediator.Ants.Count == 0)
+            {
+                return null;
+            }
+            return boardResponse;
+            
+        }
+
+        public void Update(IAntHandler antHandler, string ev)
+        {
+            if (ev == "found")
+            {
+                Messages.Add($"{antHandler.Ant.Id} picked grain at position {antHandler.Ant.Location}");
+            } else if (ev == "delivered")
+            {
+                Messages.Add($"{antHandler.Ant.Id} delivered grain to Queen! {antHandler.Ant.Energy} Energy left");
+            } else if (ev == "destroyed")
+            {
+                Messages.Add($"{antHandler.Ant.Id} finished!");
+            }
+            
         }
     }
 }

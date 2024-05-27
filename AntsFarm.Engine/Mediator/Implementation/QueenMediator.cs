@@ -23,26 +23,12 @@ namespace AntsFarm.Engine.Mediator.Implementation
 
         public void Notify(IAntHandler sender, string ev)
         {
-            if (ev == "moved")
-            {
-                Console.WriteLine($"{sender.Ant.Location.X} + {sender.Ant.Location.Y}");
-                foreach (var item in Observers)
-                {
-                    item.Update(sender, ev);
-                }
-            }
-            else if (ev == "found")
-            {
-                Console.WriteLine($"{sender.Ant.Id} found the grain at pos {sender.Ant.Location.X}{sender.Ant.Location.Y}");
-                foreach (var item in Observers)
-                {
-                    item.Update(sender, ev);
-                }
-            } else if (ev == "delivered")
-            {
-                Console.WriteLine($"{sender.Ant.Id} delivered grain with enery {sender.Ant.Energy}");
-            }
             
+            foreach (var item in Observers)
+            {
+                item.Update(sender, ev);
+            }
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AntsFarm.Engine.AntState.Handler;
 using AntsFarm.Engine.BoardGenerator.Implementation;
+using AntsFarm.Engine.BoardGenerator.Interfaces;
 using AntsFarm.Engine.Observer;
 using AntsFarm.Models.Entities.Implementations;
 using AntsFarm.Models.Entities.Implementations.Base;
@@ -15,15 +16,15 @@ namespace AntsFarm.Engine.BoardManager
     public class AntBoardManager : IObserver
     {
         private  IBoard board;
-        private readonly BoardCreator boardCreator;
+        private readonly IBoardCreator boardCreator;
 
-        public AntBoardManager(BoardCreator boardCreator)
+        public AntBoardManager(IBoardCreator boardCreator)
         {
             this.boardCreator = boardCreator;
         }
         public void Update(IAntHandler antHandler)
         {
-            Console.WriteLine($"updated + {antHandler.Ant.Location.X} {antHandler.Ant.Location.Y}");
+            
             board[antHandler.Ant.Location.X, antHandler.Ant.Location.Y].Temp.Add(antHandler.Ant);
             board[antHandler.LastPos.X, antHandler.LastPos.Y].Temp.Remove(antHandler.Ant);
         }
@@ -62,6 +63,9 @@ namespace AntsFarm.Engine.BoardManager
             if (ev == "found")
             {
                 board[antHandler.Ant.Location.X, antHandler.Ant.Location.Y] = new Tile(new PathFindableEntity());
+            } else if (ev == "destroyed")
+            {
+                board[antHandler.Ant.Location.X, antHandler.Ant.Location.Y].Temp.Remove(antHandler.Ant);
             }
         }
     }

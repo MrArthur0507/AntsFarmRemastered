@@ -11,7 +11,7 @@ namespace AntsFarm.Models.Utilities
     public interface IBoard
     {
         public ITile this[int index, int index2] { get; set; }
-
+        public ITile[,] _board { get; set; }
         public Point QueenPosition { get; set; }
         public List<Point> GrainPositions { get; set; }
         public int GetLength();

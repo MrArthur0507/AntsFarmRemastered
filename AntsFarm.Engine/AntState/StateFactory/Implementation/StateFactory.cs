@@ -26,6 +26,11 @@ namespace AntsFarm.Engine.AntState.StateFactory.Implementation
                 IAntState returnState = new TravelingToQueenState();
                 returnState.CurrentCourse = _pathFinder.FindPath(ant.Ant.Location, _pathFinder.b.QueenPosition);
                 ant.AntState = returnState;
+            } else if (state == "returningToBase")
+            {
+                IAntState returnState = new ReturningToBaseState();
+                returnState.CurrentCourse = _pathFinder.FindPath(ant.Ant.Location, new System.Drawing.Point(0, 0));
+                ant.AntState = returnState;
             }
         }
     }

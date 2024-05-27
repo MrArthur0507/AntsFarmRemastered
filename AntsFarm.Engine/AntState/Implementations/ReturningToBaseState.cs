@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AntsFarm.Engine.AntState.Implementations
 {
-    public class TravelingToQueenState : IAntState
+    public class ReturningToBaseState : IAntState
     {
         public List<Point> CurrentCourse { get; set; }
         private int pos = 0;
@@ -26,8 +26,7 @@ namespace AntsFarm.Engine.AntState.Implementations
             }
             else
             {
-                ant.QueenMediator.Notify(ant, "delivered");
-                ant.StateFactory.GenerateState(ant, "returningToBase");
+                ant.QueenMediator.Notify(ant, "destroyed");
             }
         }
     }

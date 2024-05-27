@@ -11,6 +11,6 @@ namespace AntsFarm.Engine.Engine.Interfaces
     {
         public void Start();
 
-        public IBoard HandleMove();
+        public BoardResponse HandleMove();
     }
 }

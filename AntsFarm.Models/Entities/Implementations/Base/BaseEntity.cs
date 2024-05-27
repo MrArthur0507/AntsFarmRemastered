@@ -11,7 +11,7 @@ namespace AntsFarm.Models.Entities.Implementations.Base
     {
         public BaseEntity()
         {
-            Name = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid();
             Symbol = '#';
         }
         public Guid Id { get; set; }

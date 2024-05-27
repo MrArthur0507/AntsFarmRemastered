@@ -15,7 +15,7 @@ namespace AntsFarm.Models.Utilities
             _board = new ITile[size, size];
         }
 
-        private ITile[,] _board;
+        public ITile[,] _board { get; set; }
 
         public Point QueenPosition { get; set; }
 
